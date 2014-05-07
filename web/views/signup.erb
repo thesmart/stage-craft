@@ -1,0 +1,12 @@
+<%= partial(:'header') %>
+<div id="signup">
+  <div class="col-sm-push-4 col-sm-4">
+    <%= partial(:signup, :locals => { :id_prefix => 'signup', :username => @username, :show_nav => true }) %>
+    <script>
+      (function() {
+        var element = App.scriptPrev();
+        App.mixins.autofocus(element);
+      })();
+    </script>
+  </div>
+</div>

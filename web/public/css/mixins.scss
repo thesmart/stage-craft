@@ -1,0 +1,161 @@
+// Variable settings for /addons/prefixer.scss
+$prefix-for-webkit:    true !default;
+$prefix-for-mozilla:   true !default;
+$prefix-for-microsoft: true !default;
+$prefix-for-opera:     true !default;
+$prefix-for-spec:      true !default; // required for keyframe mixin
+
+// @credit https://github.com/thoughtbot/bourbon
+// @license https://github.com/thoughtbot/bourbon/blob/master/LICENSE
+//************************************************************************//
+// Example: @include prefixer(border-radius, $radii, webkit ms spec);
+//************************************************************************//
+@mixin prefixer ($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      @if $prefix-for-webkit {
+        -webkit-#{$property}: $value;
+      }
+    }
+    @else if $prefix == moz {
+      @if $prefix-for-mozilla {
+        -moz-#{$property}: $value;
+      }
+    }
+    @else if $prefix == ms {
+      @if $prefix-for-microsoft {
+        -ms-#{$property}: $value;
+      }
+    }
+    @else if $prefix == o {
+      @if $prefix-for-opera {
+        -o-#{$property}: $value;
+      }
+    }
+    @else if $prefix == spec {
+      @if $prefix-for-spec {
+        #{$property}: $value;
+      }
+    }
+    @else  {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
+
+// @credit https://github.com/thoughtbot/bourbon
+// @license https://github.com/thoughtbot/bourbon/blob/master/LICENSE
+//************************************************************************//
+// Example: @include prefixer(none);
+//************************************************************************//
+@mixin user-select($arg: none) {
+  @include prefixer(user-select, $arg, webkit moz ms spec);
+}
+
+// Hides element contents to allow background image to replace content
+//
+// Styleguide 0.0.1
+@mixin hideContent($indent: -1) {
+  overflow: hidden;
+  text-indent: 1000px * $indent;
+}
+
+// Replace content with image
+//
+// $background - The image to replace the content with
+// $bg_height - New area height
+// $bg_width - New area width
+// $indent - set to -1 if left aligned, 1 if right aligned
+//
+// Styleguide 0.0.1
+@mixin replaceWithBg($background, $bg_height, $bg_width, $indent: -1){
+  @include hideContent($indent);
+  background: $background;
+  height: $bg_height;
+  width: $bg_width;
+  background-size: $bg_width $bg_height;
+  background-position: left top;
+}
+
+// @mixins
+// @credit https://github.com/zurb/foundation/blob/1c70937eda5b8db5d568a9e5f1a9326541ef2790/scss/foundation/components/_global.scss
+// @license https://raw.github.com/zurb/foundation/1c70937eda5b8db5d568a9e5f1a9326541ef2790/LICENSE
+//
+// We use this to create equilateral triangles
+// $triangle-size - Used to set border-size. No default, set a px or em size.
+// $triangle-color - Used to set border-color which makes up triangle. No default
+// $triangle-direction - Used to determine which direction triangle points. Options: top, bottom, left, right
+@mixin css-triangle($triangle-size, $triangle-color, $triangle-direction) {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border: inset $triangle-size;
+  $eq-size: $triangle-size + ($triangle-size * .5);
+
+  @if ($triangle-direction == top) {
+    border-color: $triangle-color transparent transparent transparent;
+    border-top-style: solid;
+    border-width: 0 $triangle-size $triangle-size $eq-size;
+  }
+  @if ($triangle-direction == bottom) {
+    border-color: transparent transparent $triangle-color transparent;
+    border-bottom-style: solid;
+    border-width: 0 $triangle-size $triangle-size $eq-size;
+  }
+  @if ($triangle-direction == left) {
+    border-color: transparent transparent transparent $triangle-color;
+    border-left-style: solid;
+    border-width: $triangle-size 0 $triangle-size $eq-size;
+  }
+  @if ($triangle-direction == right) {
+    border-color: transparent $triangle-color transparent transparent;
+    border-right-style: solid;
+    border-width: $triangle-size 0 $triangle-size $eq-size;
+  }
+}
+
+@mixin placholder-color($color) {
+  input::-webkit-input-placeholder {
+    color: $color !important;
+  }
+  input:-moz-placeholder {
+    color: $color !important;
+  }
+  input::-moz-placeholder {
+    color: $color !important;
+  }
+  input:-ms-input-placeholder {
+    color: $color !important;
+  }
+}
+
+@mixin placholder-color-animation($color, $time) {
+  input::-webkit-input-placeholder {
+    color: $color !important;
+    transition: all $time linear;
+    -webkit-transition: all $time linear;
+  }
+  input:-moz-placeholder {
+    color: $color !important;
+    transition: all $time linear;
+    -moz-transition: all $time linear;
+  }
+  input::-moz-placeholder {
+    color: $color !important;
+    transition: all $time linear;
+    -moz-transition: all $time linear;
+  }
+  input:-ms-input-placeholder {
+    color: $color !important;
+    transition: all $time linear;
+  }
+}
+
+@mixin placholder-zoom-animation($color, $time) {
+  input::-webkit-input-placeholder {
+    font-size: $color !important;
+    transition: all $time linear;
+    -webkit-transition: all $time linear;
+  }
+}

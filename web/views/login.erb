@@ -1,0 +1,9 @@
+<%= partial(:'header') %>
+<div id="login">
+  <div class="col-sm-push-4 col-sm-4">
+    <%= partial(:login, :locals => { :id_prefix => 'login', :username => @username, :show_nav => true }) %>
+    <script>
+      App.mixins.autofocus($('.control-login').last());
+    </script>
+  </div>
+</div>

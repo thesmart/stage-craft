@@ -1,0 +1,42 @@
+<% id_prefix = defined?(id_prefix) ? "#{id_prefix}_" : '' %>
+<div class="control-signup">
+  <form action="javascript:void(0);" accept-charset="UTF-8" autocomplete="on" role="form" data-persist="garlic">
+    <h4>New? Sign Up!</h4>
+
+    <%= partial(:flash) %>
+
+    <div class="form-group">
+      <label for="<%== id_prefix %>name">Your Name</label>
+      <input id="<%== id_prefix %>name" name="name" type="text" placeholder="First Last" class="form-control"
+             data-parsley-required
+             data-parsley-errors-messages-disabled
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="<%== id_prefix %>email">Email Address</label>
+      <input id="<%== id_prefix %>email" name="email" type="email" placeholder="your@email.com" class="form-control" value="<%== @username %>"
+        data-parsley-required
+        data-parsley-errors-messages-disabled
+      />
+    </div>
+
+    <%= partial(:passwords_form_group, :locals => { :id_prefix => id_prefix }) %>
+
+    <div class="login-signup-nav form-group">
+      <% if defined?(show_nav) and show_nav %>
+        <div class="col-xs-8">
+          <button type="submit" class="btn btn-success">Sign Up</button>
+        </div>
+        <div class="text-right col-xs-4">
+          <a class="login" href="/login"><span class="fa fa-key"></span> Login</a>
+        </div>
+      <% else %>
+        <button type="submit" class="btn btn-success">Sign Up</button>
+      <% end %>
+    </div>
+  </form>
+</div>
+<script>
+  new App.SignupPartial(App.scriptPrev())
+</script>

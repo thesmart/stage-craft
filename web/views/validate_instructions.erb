@@ -1,0 +1,27 @@
+<%= partial(:'header') %>
+<div id="validate_instructions">
+  <div class="text-center col-sm-push-3 col-sm-6">
+    <h3>Please confirm your email address.</h3>
+    <%= partial(:flash) %>
+    <p>
+      We have sent a confirmation email to <%== @user.email %>.
+      Click on the confirmation link in the email to activate your account.
+    </p>
+    <% if @isp_info[:url] %>
+      <div class="buttons">
+        <a class="btn btn-primary btn-lg isp-button" href="<%== @isp_info[:url] %>" title="Click here to go to your inbox" target="_blank">
+          Go to <%== @isp_info[:name] %> now
+        </a>
+      </div>
+    <% end %>
+    <p>
+      Haven't received your confirmation email?
+      <br/>
+      Check your spam folder or
+      <a class="resend-btn" href="javascript:void(0);">click here to resend</a>.
+    </p>
+  </div>
+</div>
+<script>
+  new App.EmailValidationInstructions(App.scriptPrev());
+</script>

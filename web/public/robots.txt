@@ -1,0 +1,44 @@
+#
+# My CPU is a neural net processor; a learning computer.
+#
+
+User-Agent: *
+Disallow: /logout*
+Disallow: /api/
+
+#
+# Hasta la vista, baby.
+#
+
+User-agent: Fasterfox
+Disallow: /
+
+User-agent: Nutch
+Disallow: /
+
+User-agent: spock
+Disallow: /
+
+User-agent: OmniExplorer_Bot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: TurnitinBot
+Disallow: /
+
+User-agent: BecomeBot
+Disallow: /
+
+User-agent: genieBot
+Disallow: /
+
+User-agent: dotbot
+Disallow: /
+
+User-agent: MLBot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /

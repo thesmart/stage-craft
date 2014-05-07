@@ -1,0 +1,1 @@
+Dir["#{$settings.root}/web/controllers/api/*.rb"].each {|file| require file }

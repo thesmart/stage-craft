@@ -1,0 +1,30 @@
+.control-login,
+.control-signup {
+  .login-signup-nav {
+    .text-right {
+      a {
+        line-height: 30px;
+        vertical-align: middle;
+        .fa {
+          visibility: hidden;
+          margin-right: 2px;
+        }
+      }
+      a:hover {
+        .fa {
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+#validate_instructions {
+  .buttons {
+    margin-bottom: 1em;
+  }
+
+  a.resend-btn {
+    white-space: nowrap;
+  }
+}

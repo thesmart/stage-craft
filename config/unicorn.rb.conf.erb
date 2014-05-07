@@ -1,0 +1,71 @@
+# See http://unicorn.bogomips.org/Unicorn/Configurator.html for complete
+# documentation.
+
+# Use at least one worker per core but watch memory usage on Dynos
+# Use at least one worker per core if you're on a dedicated server,
+# more will usually help for _short_ waits on databases/caches.
+worker_processes Integer(<%= unicorn_config[:worker_processes] || 2 %>)
+
+# nuke workers after some time running
+timeout Integer(<%= unicorn_config[:default_timeout] || 120  %>)
+
+# combine future Ruby2 with "preload_app true" for memory savings
+# http://unicorn.bogomips.org/Unicorn/Configurator.html#method-i-preload_app
+# http://patshaughnessy.net/2012/3/23/why-you-should-be-excited-about-garbage-collection-in-ruby-2-0
+preload_app true
+
+# Help ensure your application will always spawn in the symlinked
+# "current" directory that Capistrano sets up.
+working_directory "<%= release_path %>/web"
+
+# listen on both a Unix domain socket and a TCP port,
+# we use a shorter backlog for quicker failover when busy
+listen <%= unicorn_config[:port] %>, :tcp_nopush => true
+#listen "/path/to/.unicorn.sock", :backlog => 64
+
+# feel free to point this anywhere accessible on the filesystem
+pid "<%= unicorn_config[:pid_file] %>"
+
+# By default, the Unicorn logger will write to stderr.
+# Additionally, ome applications/frameworks log to stderr or stdout,
+# so prevent them from going to /dev/null when daemonized here:
+stderr_path "<%= unicorn_config[:stderr_path] %>"
+stdout_path "<%= unicorn_config[:stdout_path] %>"
+
+# BEFORE forking from Master Unicorn process
+before_fork do |server, worker|
+  # Catch TERM and send QUIT to self (for Heroku platform)
+  Signal.trap 'TERM' do
+    puts 'Before_Fork: Intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
+
+  ##
+  # When sent a USR2, Unicorn will suffix its pidfile with .oldbin and
+  # immediately start loading up a new version of itself (loaded with a new
+  # version of our app). When this new Unicorn is completely loaded
+  # it will begin spawning workers. The first worker spawned will check to
+  # see if an .oldbin pidfile exists. If so, this means we've just booted up
+  # a new Unicorn and need to tell the old one that it can now die. To do so
+  # we send it a QUIT.
+  #
+  # Before forking, kill the master process that belongs to the .oldbin PID.
+  # This enables 0 downtime deploys.
+  old_pid = "<%= unicorn_config[:pid_file] %>.oldbin"
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
+  end
+
+end
+
+# AFTER forking from Master Unicorn process
+after_fork do |server, worker|
+  # Catch TERM and do nothing
+  Signal.trap 'TERM' do
+    puts 'After_Fork:  Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
+  end
+end

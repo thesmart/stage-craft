@@ -1,0 +1,36 @@
+<%
+   validation_url = "#{root_url}/validate/#{url_encode email_token}"
+%>
+<% if defined?(name) %>
+  <h1><%= name %>,</h1>
+<% else %>
+  <h1>Hello,</h1>
+<% end %>
+<p class="lead">
+  Email Confirmation
+</p>
+<p>
+  We received a request to validate your email address. To continue, click on the button below within three days:
+</p>
+<table class="medium-button">
+  <tbody>
+    <tr>
+      <td>
+        <a href="<%== validation_url %>" style="display: block;">Confirm Your Email</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+<p>
+  Or copy and paste the URL into your browser:
+  <blockquote>
+    <a href="<%== validation_url %>"><%== validation_url %></a>
+  </blockquote>
+</p>
+<p>
+  If you're getting a lot of confirmation emails you didn't request, please contact us:
+  <blockquote>
+    <a href="mailto:<%== $settings.customer_service_email %>?subject=<%== url_encode 'RE: Password reset requests' %>"><%== $settings.customer_service_email %></a>
+  </blockquote>
+</p>

@@ -1,0 +1,42 @@
+<% id_prefix = defined?(id_prefix) ? "#{id_prefix}_" : '' %>
+<div class="control-login">
+  <form action="javascript:void(0);" accept-charset="UTF-8" autocomplete="on" role="form" data-persist="garlic">
+    <h4>Returning? Sign In!</h4>
+
+    <%= partial(:flash) %>
+
+    <div class="form-group">
+      <label for="<%== id_prefix %>username">Email Address</label>
+      <input id="<%== id_prefix %>username" name="username" type="email" placeholder="your@email.com" class="form-control" value="<%== @username %>"
+        data-parsley-required
+        data-parsley-errors-messages-disabled
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="<%== id_prefix %>password">Password</label>
+      <input id="<%== id_prefix %>password" name="password" type="password" placeholder="Password" class="form-control"
+        data-parsley-required
+        data-parsley-errors-messages-disabled
+      />
+    </div>
+
+    <div class="login-signup-nav form-group">
+      <% if defined?(show_nav) and show_nav %>
+        <div class="col-xs-8">
+          <button type="submit" class="btn btn-primary">Login</button>
+          <a class="forgot-password" href="/password/forgot">Forgot password?</a>
+        </div>
+        <div class="text-right col-xs-4">
+          <a class="signup" href="/signup"><span class="fa fa-check-square-o"></span> Sign Up</a>
+        </div>
+      <% else %>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a class="forgot-password" href="/password/forgot">Forgot password?</a>
+      <% end %>
+    </div>
+  </form>
+</div>
+<script>
+  new App.LoginPartial(App.scriptPrev())
+</script>

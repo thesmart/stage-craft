@@ -1,0 +1,32 @@
+<%
+   user ||= @user
+%>
+<header>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="logo-container">
+        <a class="logo" href="/" data-bean="header-logo">
+          Stage Craft
+        </a>
+      </div>
+    </div>
+    <% if user %>
+      <div class="col-sm-9">
+        <ul class="nav nav-pills text">
+          <li><a href="/courses" title="A list of all your courses.">Courses</a></li>
+          <li class="dropdown pull-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
+              <%== user.login_name %> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    <% else %>
+      <div class="col-sm-9">
+      </div>
+    <% end %>
+  </div>
+</header>

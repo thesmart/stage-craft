@@ -1,0 +1,5 @@
+# Rakefile
+APP_FILE  = 'app.rb'
+APP_CLASS = 'StageCraftWebApp'
+
+require 'sinatra/assetpack/rake'

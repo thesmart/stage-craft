@@ -1,0 +1,30 @@
+<%
+   admin ||= nil
+%>
+<header>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="logo-container">
+        <a class="logo" href="/" data-bean="header-logo">
+          <img src="/images/apple-touch-icon-144x144.png"/>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <ul class="nav nav-pills">
+        <li><a href="/admin">Dashboard</a></li>
+        <li><a href="/admin/users">Users</a></li>
+      </ul>
+    </div>
+    <% if admin %>
+      <div class="col-sm-3">
+        <div class="session">
+          <p>ADMIN: <%== admin.login_name %></p>
+          <p><a href="/logout">logout</a></p>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-sm-9">
+    </div>
+  </div>
+</header>

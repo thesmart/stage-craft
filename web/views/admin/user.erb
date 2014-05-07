@@ -1,0 +1,18 @@
+<%= partial(:'admin/header', :locals => {:admin => @admin}) %>
+<h2><%== other.name %></h2>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>field</th>
+    <th>value</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% other.attributes.each do |pair| %>
+      <tr>
+        <td><%== pair[0] %></td>
+        <td><%== pair[1] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

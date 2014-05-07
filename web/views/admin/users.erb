@@ -1,0 +1,30 @@
+<%= partial(:'admin/header', :locals => {:admin => @admin}) %>
+<div class="col-xs-12">
+  <h2>Users</h2>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>guid</th>
+      <th>name</th>
+      <th>email</th>
+      <th>phone</th>
+      <th>join</th>
+      <th>visit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% users.each_with_index do |user, i|  %>
+      <tr>
+        <td><%== user.id%></td>
+        <td><a href="/admin/user/<%== user.guid %>"><%== user.guid %></a></td>
+        <td><%== user.name %></td>
+        <td><%== user.email %></td>
+        <td><%== user.phone %></td>
+        <td><%= partial(:time, :locals => {:time => user.created_at, :display => 'M/D HH:mm'}) %></td>
+        <td><%= partial(:time, :locals => {:time => user.visit_at, :display => 'M/D HH:mm'}) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

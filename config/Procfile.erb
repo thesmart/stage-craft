@@ -1,0 +1,3 @@
+beanstalkd: beanstalkd -l <%=beanstalkd_config[:host]%> -p <%=beanstalkd_config[:port]%>
+web: <%=rbenv_path%>bundle exec unicorn -c <%=unicorn_config[:config_file_path]%> --env <%=rack_env%>
+worker: <%=rbenv_path%>bundle exec 'RACK_ENV="<%=rack_env%>" ruby ./daemons/worker.rb'

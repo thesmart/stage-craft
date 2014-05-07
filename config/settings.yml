@@ -1,0 +1,96 @@
+development:
+  name: Stage Craft
+  host: 127.0.0.1
+  port: 1337
+  url: http://127.0.0.1:1337
+  http_bind: 127.0.0.1
+  http_port: 1337
+  http_session_name: development.session
+  http_session_secret: REPLACE_ME_WITH_A_LONG_UNIQUE_RANDOM_STRING
+  http_session_expire_days: 90
+  http_show_exceptions: true
+
+  # QUEUE SERVER CONFIG
+  beanstalkd_host: 127.0.0.1
+  beanstalkd_port: 11300
+  worker_tube: development_worker
+
+  # DATABASES
+  mysql_hostname: localhost
+  mysql_user: root
+  mysql_password:
+
+  # API KEYS
+  google_analytics_key: UA-00000000-2
+  mailgun_custom_domain: sandbox.mailgun.com
+  mailgun_api_key: key-XXXXXXXXXXXXXXXX
+  mailgun_public_api_key: pubkey-XXXXXXXXXXXXXXXX
+
+  # OTHER
+  admin_emails:
+    - you@example.com
+    - me@example.com
+  customer_service_email: development@example.com
+
+production:
+  name: Stage Craft
+  host: www.example.com
+  port: 80
+  url: https://www.example.com
+  http_bind: 127.0.0.1
+  http_port: 1337
+  http_session_name: session
+  http_session_secret: REPLACE_ME_WITH_A_LONG_UNIQUE_RANDOM_STRING
+  http_session_expire_days: 90
+  http_show_exceptions: false
+
+  # QUEUE SERVER CONFIG
+  beanstalkd_host: 127.0.0.1
+  beanstalkd_port: 11300
+  worker_tube: worker
+
+  # DATABASES
+  mysql_hostname: 127.0.0.1
+  mysql_socket: /var/run/mysqld/mysqld.sock
+  mysql_user: root
+  mysql_password: REPLACE_ME_WITH_MYSQL_PASSWORD
+
+  # API KEYS
+  google_analytics_key: UA-00000000-1
+  mailgun_custom_domain: sandbox.mailgun.com
+  mailgun_api_key: key-XXXXXXXXXXXXXXXX
+  mailgun_public_api_key: pubkey-XXXXXXXXXXXXXXXX
+
+  # OTHER
+  admin_emails: []
+  customer_service_email: production@example.com
+
+test:
+  name: Stage Craft
+  host: 127.0.0.1
+  port: 1337
+  url: http://127.0.0.1:1337
+  http_session_name: test.session
+  http_session_secret: REPLACE_ME_WITH_A_LONG_UNIQUE_RANDOM_STRING
+  http_session_expire_days: 90
+  http_show_exceptions: false
+
+  # QUEUE SERVER CONFIG
+  beanstalkd_host: 127.0.0.1
+  beanstalkd_port: 11300
+  worker_tube: test_worker
+
+  # DATABASES
+  mysql_hostname: localhost
+  mysql_user: root
+  mysql_password:
+
+  # API KEYS
+  google_analytics_key: UA-00000000-2
+  mailgun_custom_domain: sandbox.mailgun.com
+  mailgun_api_key: key-XXXXXXXXXXXXXXXX
+  mailgun_public_api_key: pubkey-XXXXXXXXXXXXXXXX
+
+  # OTHER
+  admin_emails: []
+  customer_service_email: test@example.com
